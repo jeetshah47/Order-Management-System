@@ -3,6 +3,6 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <img src="outputs/main.png">
+    <img src="https://drive.google.com/file/d/1gpMthBZhlVt6gWZu7M485dHuR68EiOBN/view?usp=sharing">
    </body>
 </html>
