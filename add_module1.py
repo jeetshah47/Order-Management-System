@@ -11,13 +11,26 @@ def main():
     #Function for command
     lbl=Label(window, text="Order ID :", fg='lawn green',bg=bg, font=("Helvetica", 10))
     lbl.place(x=10, y=10)
-    txtfld=Entry(window, text="random text1", bd=2, font=("Helvetica", 10))
-    txtfld.place(x=150, y=10, width=180)
-    txtfld.insert(0,"Enter a valid id")
+    f1 = open("resources/order_id.txt","r")
+    fixid = f1.readlines()
+    nextid = int(fixid[-1])+1
+    print(nextid)
+    #id_get = txtfld.get()
+    #f1.write("\n"+id_get)
+    f1.close()
+    txtfld=Label(window, text=nextid, bd=2, font=("Helvetica", 10),bg=bg,fg="white")
+    txtfld.place(x=67, y=10, width=180)
+    def check():
+        changes = True
+        if txtfld1.get() == "" or   C1.get() == ""  or C2.get() == ""  or txtfld6.get() == "" or v0.get() == None:
+            m.showerror("NO","Please enter proper details")
+            changes =  False
+        if changes:
+            save_in_file()
+    #txtfld.insert(0,"Enter a valid id")
     def save_in_file():
         f1 = open("resources/order_id.txt","a+")
-        id_get = txtfld.get()
-        f1.write("\n"+id_get)
+        f1.write("\n"+str(nextid))
         f1.close()
         f2 = open('resources/customer_id.txt','a+')
         customer_id = txtfld1.get()
@@ -43,7 +56,6 @@ def main():
     lbl=Label(window, text="Customer Name :", fg='lawn green',bg=bg ,font=("Helvetica", 10))
     lbl.place(x=10, y=40)
     txtfld1=Entry(window, text="random text2", bd=2, font=("Helvetica", 10))
-    txtfld1.insert(0,"Enter Customer Name")
     txtfld1.place(x=150, y=40, width=180)
 
     # product selection
@@ -53,17 +65,14 @@ def main():
     C1 = Entry(window,font=('Helvetica',10),bg='white',fg='black' ,bd=2)
     C1.place(x=150, y=80)
     C1.delete(0,END)
-    C1.insert(0,"Enter Product Name")
     Label(window,text="Address: ",bg=bg,fg='lawn green',font=('Helvetica',10)).place(x=10,y=120)
     C2 = Entry(window,font=('Helvetica',10),bg='white',fg='black',width=30,bd=2)
-    C2.insert(0,"Enter address")
     C2.place(x = 150,y = 120)
     # Quantity of products
     # Total cost
     lbl=Label(window, text="Total Cost :", fg='lawn green',bg=bg, font=("Helvetica", 10))
     lbl.place(x=10, y=180)
     txtfld6=Entry(window, text="random text7", bd=2)
-    txtfld6.insert(0,"Enter cost in ₹")
     txtfld6.place(x=150, y=180, width=180)
 
     # Selection of payment mode
@@ -85,7 +94,7 @@ def main():
         dashboard_py.main()
         exit()
     # Entering/Cancelling the Order
-    btn=Button(window, text="Enter Order", bg='black', fg='white',font=("Helvetica", 10),command = save_in_file, bd=2)
+    btn=Button(window, text="Enter Order", bg='black', fg='white',font=("Helvetica", 10),command = check, bd=2)
     btn.place(x=10, y=260)
     btn=Button(window, text="Cancel Order", bg='black',fg='white', font=("Helvetica", 10), bd=2,command=ask_yes_no)
     btn.place(x=150, y=260)
